@@ -47,8 +47,8 @@
     "tasks"
   ],
   "dependencies": {
+    "acorn": "^5.7.1",
     "acorn-jsx": "^4.1.1",
-    "acorn-jsx-walk": "^1.0.1",
     "chalk": "^2.4.1",
     "clone-deep": "^4.0.0",
     "commander": "^2.15.1",

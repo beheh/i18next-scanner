@@ -1,7 +1,9 @@
 /* eslint no-console: 0 */
 /* eslint no-eval: 0 */
 import fs from 'fs';
-import jsxwalk from 'acorn-jsx-walk';
+import * as acornWalk from 'acorn/dist/walk';
+import { parse as acornParse } from 'acorn-jsx';
+import jsxWalk from 'acorn-jsx/walk';
 import chalk from 'chalk';
 import cloneDeep from 'clone-deep';
 import deepMerge from 'deepmerge';
@@ -493,7 +495,11 @@ class Parser {
         };
 
         try {
-            jsxwalk(content, { JSXElement: parseJSXElement });
+            const source = acornParse(content, {
+                sourceType: "module",
+                plugins: { jsx: true }
+            });
+            jsxWalk(acornWalk).simple(source, { JSXElement: parseJSXElement });
         } catch (err) {
             this.log(`i18next-scanner: Unable to parse ${component} component with the content`);
             this.log(err);
